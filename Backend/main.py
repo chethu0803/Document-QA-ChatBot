@@ -5,7 +5,7 @@ import os
 import shutil
 import google.generativeai as genai
 
-GEMINI_API_KEY= 'Your API Key'
+GEMINI_API_KEY= 'Yout'
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -51,7 +51,6 @@ async def upload_file(file: UploadFile = File(...)):
 
 @app.post("/ask/")
 async def ask_question(text: str = Form(...), question: str = Form(...)):
-    """Handles user questions and fetches answers using the Gemini API."""
     try:
         prompt = f"Document Content: {text}\n\nUser Question: {question}"
         raw_response= model.generate_content(prompt)

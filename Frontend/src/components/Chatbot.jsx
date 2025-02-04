@@ -39,6 +39,7 @@ function Chatbot() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setExtractedText(response.data.text);
+      console.log(response.data.text)
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -69,6 +70,7 @@ function Chatbot() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       const aiMessage = { type: "answer", text: response.data.answer };
+      console.log(response)
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error("Error fetching answer:", error);
@@ -82,16 +84,19 @@ function Chatbot() {
   }, [messages]);
 
   return (
-    <div className="flex flex-col items-center space-y-6 p-6 w-full max-w-md mx-auto">
-      {!file ? (
+    <div className="flex flex-col items-center space-y-6 p-6 w-full max-w-2xl mx-auto">
+      {!file ? (<div>
+        <p className="text-center font-bold text-4xl w-full my-6">Welcome to <span className="text-green-500 ">Document QA ChatBot,</span></p>
         <div
           {...getRootProps()}
-          className="border-2 border-dashed p-6 w-full text-center cursor-pointer rounded-lg"
+          className="border-2 border-dashed p-6 w-full text-center cursor-pointer rounded-lg h-[40vh] flex flex-col justify-center "
         >
           <input {...getInputProps()} />
           <UploadCloud className="mx-auto mb-2 text-gray-500" size={32} />
           <p className="text-gray-600">Drop your PDF or TXT file here or click to upload.</p>
         </div>
+      </div>
+        
       ) : (<div className="w-full bg-white shadow-lg rounded-lg flex flex-col h-[90vh] ">
         
           <div className="bg-green-500 text-white text-center py-3 font-bold rounded-t-lg">
